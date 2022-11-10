@@ -1,0 +1,33 @@
+name: "Build and Test"
+on:
+  # Trigger manually
+  workflow_dispatch:
+  pull_request:
+  push:
+    tags:
+      - "*"
+    branches:
+      - main
+
+jobs:
+  test-1:
+    runs-on: macos-latest
+    
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v3
+
+    - name: Test downloading random repo
+      uses: dreamwhite/release-downloader@v1.6
+      id: download-public
+      with: 
+        repository: "robinraju/probable-potato"
+        tag: "1.0.1"
+        fileName: "potato.jpeg"
+        tarBall: true
+        zipBall: true
+        out-file-path: "./test-downloads"
+          
+    - name: List downloaded files
+      shell: bash
+      run: ls -lrth test-downloads
