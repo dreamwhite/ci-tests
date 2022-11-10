@@ -1,6 +1,5 @@
 name: "Build and Test"
 on:
-  # Trigger manually
   workflow_dispatch:
   pull_request:
   push:
